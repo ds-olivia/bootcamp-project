@@ -1,0 +1,55 @@
+
+// Fonts
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+//@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+@import '../../../node_modules/susy/sass/susy';
+@import '../../../node_modules/breakpoint-sass/stylesheets/breakpoint';
+@import '../../../node_modules/normalize-sass/normalize';
+@import 'settings';
+
+* {
+    padding: 0;
+    margin: 0;
+
+    &::before,
+    &::after {
+        box-sizing: border-box;
+    }
+}
+
+body {
+    overflow-y: scroll;
+    font: 12pt Arial;
+}
+
+.container {
+    @include container($large);
+    background: cornflowerblue;
+}
+
+.side-bar {
+    @include span(12);
+    background: tomato;
+}
+
+.main-container {
+    @include span(12);
+    background: yellowgreen;
+    color: #fff;
+}
+
+@include breakpoint($medium) {
+    .side-bar {
+        @include span(3);
+    }
+
+    .main-container {
+        @include span(9 at 3);
+    }
+}

@@ -1,0 +1,152 @@
+$small: 0;
+$smedium: 480px;
+$medium: 640px;
+$large: 1024px;
+$xlarge: 1200px;
+$xxlarge: 1440px;
+
+$susy: (
+    // The reading direction of your document. Layout elements will stack out in the direction of flow, unless
+    // otherwise directed.
+    //
+    // @option ltr  Left to right
+    // @option rtl  Right to left
+    // @default ltr
+        flow: ltr,
+
+    // Susy can produce either relative widths (fluid percentages) or static widths (using given units).
+    //
+    // @option fluid  All internal grid spans will be calculated relative to the container, and output as % values.
+    // @option static  All internal grid values will be calculated as multiples of the column-width setting. If you
+    //                 set column-width to 4em, your grid widths will be output as em values.
+    // @default fluid
+        math: fluid,
+
+    // Susy can generate output using different layout techniques. Currently we have a float module, with an extension
+    // to handle isolation as well. In the future there could be flexbox, grid, and other output styles.
+    //
+    // @option float  Floats are the most common form of layout used on the web.
+    // @option isolate  Isolation is a trick developed by John Albin Wilkins to help fix sub-pixel rounding bugs in
+    //                  fluid, floated layouts. You can think of it like absolute positioning of floats. We find it to
+    //                  be very  useful for spot-checking the worst rounding bugs, but we think it’s overkill as a
+    //                  layout technique all to itself.
+    // @default float
+        output: float,
+
+    // Set the max-width of the containing element.
+    //
+    // WARNING: For static layouts, leave container: auto and set the
+    //          column-width instead. Susy will calculate the outer container width for you. Dividing columns out of
+    //          a set container width would leave you open to sub-pixel errors, and no one likes sub-pixel errors.
+    //
+    // @option <length>  Set any explicit length (e.g. 60em or 80%), and it
+    //                   will be applied directly to the container.
+    // @option auto  Susy will calculate the width of your container based on
+    //               the other grid settings, or fall back to 100%.
+    // @default auto
+        container: auto,
+
+    // Align the container relative to it’s parent element (often the viewport).
+    //
+    // @option left  Holds container elements flush left, with margin-left: 0;
+    //               and margin-right: auto;.
+    // @option center  Centers the container, by setting both left and right
+    //                 margins to auto.
+    // @option right  Pushes the container flush right, with margin-right: 0;
+    //                and margin-left: auto;.
+    // @option <length> [*2]
+    // @default center
+        container-position: center,
+
+    // Establish the column-count and arrangement for a grid.
+    //
+    // @option <number> The number of columns in your layout.
+    // @option <list>  For asymmetrical grids, list the size of each column relative to the other columns, where 1 is
+    //                 a single column-unit. (1 2) would create a 2-column grid, with the second column being twice
+    //                 the width of the first. For a Fibonacci-inspired grid, use (1 1 2 3 5 8 13).
+        columns: 12,
+
+    // Optionaly set the explicit width of a column.
+    //
+    // @option <length>  The width of one column, using any valid unit. This will be used in static layouts to
+    //                   calculate all grid widths, but can also be used by fluid layouts to calculate an outer
+    //                   maximum width for the container.
+    // @option false/null  There is no need for column-width in fluid layouts unless you specifically want the
+    //                     container-width calculated for you.
+    // @default false
+        column-width: 100px,
+
+    // Set the width of a gutter relative to columns on your grid.
+    //
+    // @option <ratio>  Gutters are established as a ratio to the size of a column. The default 1/4 setting will
+    //                  create gutters one quarter the size of a column. In asymmetrical grids, this is 1/4 the size
+    //                  of a single column-unit.
+    //
+    //                  If you want to set explicit column and gutter widths, write your gutters setting as
+    //                  <gutter-width>/<column-width>. You can even leave the units attached.
+    //
+    //                  70px columns, 20px gutters
+    //                  $susy: (
+    //                      gutters: 20px / 70px,
+    //                  );
+    // @default 1 / 4
+        gutters: 20px / 100px,
+
+    // Set how and where gutters are added to the layout, either as padding or margins on layout elements.
+    //
+    // @option before  Gutters are added as margin before a layout element, relative to the flow direction (left-margin
+    //                 for ltr, right-margin for rtl). The first gutter on each row will need to be removed.
+    // @option after  Gutters are added as margin after a layout element, relative to the flow direction. The last
+    //                gutter on each row will need to be removed.
+    // @option split  Gutters are added as margin on both sides of a layout element, and are not removed at the edges
+    //                of the grid.
+    // @option inside  Gutters are added as padding on both sides of a layout element, and are not removed at the
+    //                 edges of the grid.
+    // @option inside-static  Gutters are added as static padding on both sides of a layout element, even in a fluid
+    //                        layout context, and are not removed at the edges of the grid.
+    // @default after
+        gutter-position: inside-static,
+
+    // Tell Susy what box model is being applied globally.
+    //
+    // @option content-box  Browsers use the content-box model unless you specify otherwise.
+    // @option content-box  If you are using the Paul Irish universal border-box technique (or something similar), you
+    //                      should change this setting to border-box. You can also use our border-box-sizing mixin,
+    //                      and we’ll take care of it all for you.
+    // @default content-box
+        global-box-sizing: content-box,
+
+    // The float-direction for the last element in a row when using the float output.
+    // @option from  This is the default for all other elements in a layout. In an ltr (left-to-right) flow, the
+    //               from-direction is left, and this setting would float “last” elements to the left, along with
+    //               the other elements.
+    // @option to    In many cases (especially with fluid grids), it can be helpful to float the last element in a
+    //               row in the opposite direction.
+    // @default to
+        last-flow: to,
+
+    // Susy has a few tools to help in debugging your layout as you work. These settings help you control the
+    // debugging environment.
+    //
+    // WARNING: Grid images are not exact. Browsers have extra trouble with sub-pixel rounding on background images.
+    //          These are meant for rough debugging, not for pixel-perfect measurements. Expect the to side of your
+    //          grid image (right if your flow is ltr) to be off by several pixels.
+    //
+    // @option <map of sub-settings>
+        debug: (
+                image: hide,
+                color: rgba(#66f, .25),
+                output: background,
+                toggle: top right,
+        ),
+
+    // There are several common helpers that you can tell Susy to use, if you provide them yourself or through a
+    // third-party library like Compass or Bourbon.
+        use-custom: (
+                background-image: true,
+                background-options: false,
+                box-sizing: true,
+                clearfix: false,
+                rem: true,
+        ),
+);
